@@ -30,7 +30,7 @@ import cesarferreira.sneakpeek.listeners.OnFlingToActionListener;
 import cesarferreira.sneakpeek.listeners.OnGeneralActionListener;
 import cesarferreira.sneakpeek.listeners.OnHoldAndReleaseListener;
 import cesarferreira.sneakpeek.listeners.OnLongHoldListener;
-import cesarferreira.sneakpeek.listeners.PeekAndPopOnTouchListener;
+import cesarferreira.sneakpeek.listeners.SneakPeekOnTouchListener;
 import cesarferreira.sneakpeek.model.HoldAndReleaseView;
 import cesarferreira.sneakpeek.model.LongHoldView;
 
@@ -188,7 +188,7 @@ public class SneakPeek {
     }
 
     protected void initialiseGestureListener(@NonNull View view, int position) {
-        view.setOnTouchListener(new PeekAndPopOnTouchListener(this, position));
+        view.setOnTouchListener(new SneakPeekOnTouchListener(this, position));
         // onTouchListener will not work correctly if the view doesn't have an
         // onClickListener set, hence adding one if none has been added.
         if(!view.hasOnClickListeners()){
