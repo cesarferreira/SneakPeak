@@ -37,6 +37,7 @@ class ListItemsAdapter(private val items: ArrayList<ItemViewModel>,
 
     private fun setupPeekAndPopHoldAndRelease() {
         setupPeekAndPopStandard()
+
         sneakPeek.addHoldAndReleaseView(R.id.play)
         sneakPeek.addHoldAndReleaseView(R.id.record)
         sneakPeek.addHoldAndReleaseView(R.id.details)
@@ -46,17 +47,19 @@ class ListItemsAdapter(private val items: ArrayList<ItemViewModel>,
             override fun onLeave(view: View, position: Int) {}
             override fun onRelease(view: View, position: Int) {
 
+                val currentItem = items[position]
+
                 when (view.id) {
-                    R.id.play -> makeSnakbar("play")
-                    R.id.record -> makeSnakbar("Started recording..g s")
-                    R.id.details -> makeSnakbar("details")
+                    R.id.play -> makeSnackbar("play")
+                    R.id.record -> makeSnackbar("Started recording ${currentItem.title}")
+                    R.id.details -> makeSnackbar("details")
                 }
             }
 
         })
     }
 
-    private fun makeSnakbar(string: String) {
+    private fun makeSnackbar(string: String) {
         Snackbar.make(itemView.rootView, string, Snackbar.LENGTH_LONG).show()
     }
 

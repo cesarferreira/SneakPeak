@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         recyclerView.adapter = ListItemsAdapter(getFakeItems() as ArrayList<ItemViewModel>, sneakPeek)
     }
 
-    private fun getFakeItems() = (0..500).map { ItemViewModel(it, "title $it", Faker.getRandomImage(300, 400)) }.toList()
+    private fun getFakeItems() = (1..500).map { ItemViewModel(it, "title $it", Faker.getRandomImage(300, 400)) }.toList()
 
     private fun initializeSneakPeek(): SneakPeek {
         return SneakPeek.Builder(this)

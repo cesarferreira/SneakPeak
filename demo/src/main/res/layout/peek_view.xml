@@ -53,55 +53,39 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="8dp">
-
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_weight="1" />
+                android:padding="8dp"
+                android:weightSum="120">
 
                 <ImageButton
                     android:id="@+id/record"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="40"
                     android:adjustViewBounds="true"
                     android:background="@null"
                     android:gravity="center_horizontal|center_vertical"
                     android:src="@drawable/ic_record" />
 
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_weight="1" />
-
                 <ImageButton
                     android:id="@+id/play"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="40"
                     android:adjustViewBounds="true"
                     android:background="@null"
                     android:gravity="center_horizontal|center_vertical"
                     android:src="@drawable/ic_play_arrow_black" />
 
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_weight="1" />
-
-
                 <ImageButton
                     android:id="@+id/details"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="40"
                     android:adjustViewBounds="true"
                     android:background="@null"
                     android:gravity="center_horizontal|center_vertical"
                     android:src="@drawable/ic_more" />
 
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_weight="1" />
             </LinearLayout>
 
         </LinearLayout>
