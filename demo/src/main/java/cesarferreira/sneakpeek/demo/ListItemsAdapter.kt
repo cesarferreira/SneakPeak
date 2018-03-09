@@ -1,23 +1,27 @@
 package cesarferreira.sneakpeek.demo
 
+import android.support.design.widget.Snackbar
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import cesarferreira.faker.loadFromUrl
-import cesarferreira.sneakpeek.listeners.OnGeneralActionListener
 import cesarferreira.sneakpeek.SneakPeek
+import cesarferreira.sneakpeek.listeners.OnGeneralActionListener
+import cesarferreira.sneakpeek.listeners.OnHoldAndReleaseListener
 import kotlinx.android.synthetic.main.item_list_item.view.*
 import kotlinx.android.synthetic.main.peek_view.view.*
 import java.util.*
+
 
 class ListItemsAdapter(private val items: ArrayList<ItemViewModel>,
                        private val sneakPeek: SneakPeek) : RecyclerView.Adapter<ListItemsAdapter.ItemViewHolder>() {
 
     private val peekView: View = sneakPeek.peekView
+    private lateinit var itemView: View
 
     init {
-        setupPeekAndPopStandard()
+        setupPeekAndPopHoldAndRelease()
     }
 
     private fun setupPeekAndPopStandard() {
@@ -31,13 +35,38 @@ class ListItemsAdapter(private val items: ArrayList<ItemViewModel>,
     }
 
 
+    private fun setupPeekAndPopHoldAndRelease() {
+        setupPeekAndPopStandard()
+        sneakPeek.addHoldAndReleaseView(R.id.play)
+        sneakPeek.addHoldAndReleaseView(R.id.record)
+        sneakPeek.addHoldAndReleaseView(R.id.details)
+
+        sneakPeek.setOnHoldAndReleaseListener(object : OnHoldAndReleaseListener {
+            override fun onHold(view: View, position: Int) {}
+            override fun onLeave(view: View, position: Int) {}
+            override fun onRelease(view: View, position: Int) {
+
+                when (view.id) {
+                    R.id.play -> makeSnakbar("play")
+                    R.id.record -> makeSnakbar("Started recording..g s")
+                    R.id.details -> makeSnakbar("details")
+                }
+            }
+
+        })
+    }
+
+    private fun makeSnakbar(string: String) {
+        Snackbar.make(itemView.rootView, string, Snackbar.LENGTH_LONG).show()
+    }
+
     private fun loadSneakPeak(position: Int) {
         peekView.titleTextView.text = items[position].title
         peekView.peakImageView.loadFromUrl(items[position].thumbnail)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_list_item, parent, false)
+        itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_list_item, parent, false)
         return ItemViewHolder(itemView)
     }
 

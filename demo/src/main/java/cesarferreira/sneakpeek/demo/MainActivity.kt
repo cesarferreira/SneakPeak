@@ -24,16 +24,14 @@ class MainActivity : AppCompatActivity() {
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
 
-        sneakPeek = initializePeekAndPop()
+        sneakPeek = initializeSneakPeek()
 
-        adapter = ListItemsAdapter(getFakeItems() as ArrayList<ItemViewModel>, sneakPeek)
-
-        recyclerView.adapter = adapter
+        recyclerView.adapter = ListItemsAdapter(getFakeItems() as ArrayList<ItemViewModel>, sneakPeek)
     }
 
     private fun getFakeItems() = (0..500).map { ItemViewModel(it, "title $it", Faker.getRandomImage(300, 400)) }.toList()
 
-    private fun initializePeekAndPop(): SneakPeek {
+    private fun initializeSneakPeek(): SneakPeek {
         return SneakPeek.Builder(this)
                 .blurBackground(true)
                 .peekLayout(R.layout.peek_view)
