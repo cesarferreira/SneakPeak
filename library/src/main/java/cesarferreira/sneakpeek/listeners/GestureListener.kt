@@ -23,7 +23,7 @@ class GestureListener(private val sneakPeek: SneakPeek) : GestureDetector.Simple
         return true
     }
 
-    override fun onFling(firstEvent: MotionEvent, secondEvent: MotionEvent, velocityX: Float, velocityY: Float): Boolean {
+    override fun onFling(firstEvent: MotionEvent?, secondEvent: MotionEvent, velocityX: Float, velocityY: Float): Boolean {
         return if (sneakPeek.onFlingToActionListener != null)
             handleFling(velocityX, velocityY)
         else
