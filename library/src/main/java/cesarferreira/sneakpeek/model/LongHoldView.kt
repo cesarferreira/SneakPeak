@@ -1,7 +1,7 @@
-package cesarferreira.sneakpeak.model
+package cesarferreira.sneakpeek.model
 
 import android.view.View
-import cesarferreira.sneakpeak.SneakPeak
+import cesarferreira.sneakpeek.SneakPeek
 import java.util.*
 
 class LongHoldView(var view: View?, var isReceiveMultipleEvents: Boolean) {
@@ -15,13 +15,13 @@ class LongHoldView(var view: View?, var isReceiveMultipleEvents: Boolean) {
      * @param position
      * @param duration
      */
-    fun startLongHoldViewTimer(sneakPeak: SneakPeak, position: Int, duration: Long) {
+    fun startLongHoldViewTimer(sneakPeek: SneakPeek, position: Int, duration: Long) {
         val longHoldTimer = Timer()
         longHoldTimer.schedule(object : TimerTask() {
             override fun run() {
-                sneakPeak.sendOnLongHoldEvent(view, position)
+                sneakPeek.sendOnLongHoldEvent(view, position)
                 if (isReceiveMultipleEvents) {
-                    startLongHoldViewTimer(sneakPeak, position, duration)
+                    startLongHoldViewTimer(sneakPeek, position, duration)
                 }
             }
         }, duration)

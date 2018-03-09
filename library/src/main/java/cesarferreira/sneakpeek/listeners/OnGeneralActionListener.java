@@ -1,4 +1,4 @@
-package cesarferreira.sneakpeak.listeners;
+package cesarferreira.sneakpeek.listeners;
 
 import android.view.View;
 

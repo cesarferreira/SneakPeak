@@ -1,4 +1,4 @@
-package cesarferreira.sneakpeak
+package cesarferreira.sneakpeek
 
 import android.content.Context
 import android.util.TypedValue

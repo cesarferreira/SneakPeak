@@ -1,4 +1,4 @@
-package cesarferreira.sneakpeak
+package cesarferreira.sneakpeek
 
 import android.animation.Animator
 import android.animation.AnimatorSet
@@ -14,7 +14,7 @@ import android.view.animation.OvershootInterpolator
 /**
  *
  *
- * Helper class for animating the SneakPeak views
+ * Helper class for animating the SneakPeek views
  */
 class PeekAnimationHelper(private val context: Context, private val peekLayout: View, private val peekView: View) {
 

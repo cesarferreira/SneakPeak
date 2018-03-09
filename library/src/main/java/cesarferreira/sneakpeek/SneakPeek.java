@@ -1,4 +1,4 @@
-package cesarferreira.sneakpeak;
+package cesarferreira.sneakpeek;
 
 import android.animation.Animator;
 import android.app.Activity;
@@ -13,7 +13,6 @@ import android.support.annotation.IntDef;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -26,16 +25,16 @@ import android.widget.FrameLayout;
 import java.util.ArrayList;
 import java.util.Timer;
 
-import cesarferreira.sneakpeak.listeners.GestureListener;
-import cesarferreira.sneakpeak.listeners.OnFlingToActionListener;
-import cesarferreira.sneakpeak.listeners.OnGeneralActionListener;
-import cesarferreira.sneakpeak.listeners.OnHoldAndReleaseListener;
-import cesarferreira.sneakpeak.listeners.OnLongHoldListener;
-import cesarferreira.sneakpeak.listeners.PeekAndPopOnTouchListener;
-import cesarferreira.sneakpeak.model.HoldAndReleaseView;
-import cesarferreira.sneakpeak.model.LongHoldView;
+import cesarferreira.sneakpeek.listeners.GestureListener;
+import cesarferreira.sneakpeek.listeners.OnFlingToActionListener;
+import cesarferreira.sneakpeek.listeners.OnGeneralActionListener;
+import cesarferreira.sneakpeek.listeners.OnHoldAndReleaseListener;
+import cesarferreira.sneakpeek.listeners.OnLongHoldListener;
+import cesarferreira.sneakpeek.listeners.PeekAndPopOnTouchListener;
+import cesarferreira.sneakpeek.model.HoldAndReleaseView;
+import cesarferreira.sneakpeek.model.LongHoldView;
 
-public class SneakPeak {
+public class SneakPeek {
 
     @IntDef({FLING_UPWARDS, FLING_DOWNWARDS})
     public @interface FlingDirections {
@@ -88,7 +87,7 @@ public class SneakPeak {
     public long popTime;
 
 
-    public SneakPeak(Builder builder) {
+    public SneakPeek(Builder builder) {
         this.builder = builder;
         init();
     }
@@ -309,10 +308,9 @@ public class SneakPeak {
 
         cancelClick(longClickView);
 
-        if (Build.VERSION.SDK_INT >= 17 && blurBackground)
+        if (Build.VERSION.SDK_INT >= 17 && blurBackground) {
             blurBackground();
-        else if (Build.VERSION.SDK_INT < 17 && blurBackground)
-            Log.e("SneakPeak", "Unable to blur background, device version below 17");
+        }
 
         peekAnimationHelper.animatePeek(ANIMATION_PEEK_DURATION);
 
@@ -552,7 +550,7 @@ public class SneakPeak {
     }
 
     /**
-     * Builder class used for creating the SneakPeak view.
+     * Builder class used for creating the SneakPeek view.
      */
 
     public static class Builder {
@@ -588,53 +586,6 @@ public class SneakPeak {
          */
         public Builder peekLayout(@LayoutRes int peekLayoutId) {
             this.peekLayoutId = peekLayoutId;
-            return this;
-        }
-
-        /**
-         * Views which will show the peek view when long clicked
-         *
-         * @param longClickViews One or more views to handle on long click events
-         * @return
-         */
-        public Builder longClickViews(@NonNull View... longClickViews) {
-            for (int i = 0; i < longClickViews.length; i++) {
-                this.longClickViews.add(longClickViews[i]);
-            }
-            return this;
-        }
-
-        /**
-         * A listener for when the onPeek view is dragged enough.
-         *
-         * @param onFlingToActionListener
-         * @return
-         */
-        public Builder onFlingToActionListener(@NonNull OnFlingToActionListener onFlingToActionListener) {
-            this.onFlingToActionListener = onFlingToActionListener;
-            return this;
-        }
-
-        /**
-         * A listener for the onPeek and onPop actions.
-         *
-         * @param onGeneralActionListener
-         * @return
-         */
-        public Builder onGeneralActionListener(@NonNull OnGeneralActionListener onGeneralActionListener) {
-            this.onGeneralActionListener = onGeneralActionListener;
-            return this;
-        }
-
-
-        /**
-         * A listener for the on long hold views to receive onLongHold actions.
-         *
-         * @param onLongHoldListener
-         * @return
-         */
-        public Builder onLongHoldListener(@NonNull OnLongHoldListener onLongHoldListener) {
-            this.onLongHoldListener = onLongHoldListener;
             return this;
         }
 
@@ -695,15 +646,15 @@ public class SneakPeak {
         }
 
         /**
-         * Create the SneakPeak object
+         * Create the SneakPeek object
          *
-         * @return the SneakPeak object
+         * @return the SneakPeek object
          */
-        public SneakPeak build() {
+        public SneakPeek build() {
             if (peekLayoutId == -1) {
                 throw new IllegalArgumentException("No peekLayoutId specified.");
             }
-            return new SneakPeak(this);
+            return new SneakPeek(this);
         }
     }
 

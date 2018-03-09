@@ -1,4 +1,4 @@
-package cesarferreira.sneakpeak.listeners;
+package cesarferreira.sneakpeek.listeners;
 
 import android.support.annotation.NonNull;
 import android.view.MotionEvent;
@@ -7,23 +7,23 @@ import android.view.View;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import cesarferreira.sneakpeak.SneakPeak;
+import cesarferreira.sneakpeek.SneakPeek;
 
 public class PeekAndPopOnTouchListener implements View.OnTouchListener {
 
-    private SneakPeak sneakPeak;
+    private SneakPeek sneakPeek;
     private int position;
     private Runnable longHoldRunnable;
     private boolean peekShown;
 
-    public PeekAndPopOnTouchListener(SneakPeak sneakPeak, int position) {
-        this.sneakPeak = sneakPeak;
+    public PeekAndPopOnTouchListener(SneakPeek sneakPeek, int position) {
+        this.sneakPeek = sneakPeek;
         this.position = position;
     }
 
     @Override
     public boolean onTouch(final View view, MotionEvent event) {
-        if (!sneakPeak.enabled) return false;
+        if (!sneakPeek.enabled) return false;
 
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             peekShown = false;
@@ -34,7 +34,7 @@ public class PeekAndPopOnTouchListener implements View.OnTouchListener {
         }
 
         if (peekShown) {
-            sneakPeak.handleTouch(view, event, position);
+            sneakPeek.handleTouch(view, event, position);
         }
         return peekShown;
     }
@@ -46,17 +46,17 @@ public class PeekAndPopOnTouchListener implements View.OnTouchListener {
      * @param view
      */
     private void cancelPendingTimer(@NonNull final View view) {
-        sneakPeak.longHoldTimer.cancel();
+        sneakPeek.longHoldTimer.cancel();
         if (longHoldRunnable != null) {
             longHoldRunnable = new Runnable() {
                 @Override
                 public void run() {
                     peekShown = false;
-                    sneakPeak.pop(view, position);
+                    sneakPeek.pop(view, position);
                     longHoldRunnable = null;
                 }
             };
-            sneakPeak.builder.activity.runOnUiThread(longHoldRunnable);
+            sneakPeek.builder.activity.runOnUiThread(longHoldRunnable);
         }
     }
 
@@ -66,8 +66,8 @@ public class PeekAndPopOnTouchListener implements View.OnTouchListener {
      * @param view
      */
     private void startTimer(@NonNull final View view) {
-        sneakPeak.longHoldTimer = new Timer();
-        sneakPeak.longHoldTimer.schedule(new TimerTask() {
+        sneakPeek.longHoldTimer = new Timer();
+        sneakPeek.longHoldTimer.schedule(new TimerTask() {
             @Override
             public void run() {
                 peekShown = true;
@@ -75,14 +75,14 @@ public class PeekAndPopOnTouchListener implements View.OnTouchListener {
                     @Override
                     public void run() {
                         if (peekShown) {
-                            sneakPeak.peek(view, position);
+                            sneakPeek.peek(view, position);
                             longHoldRunnable = null;
                         }
                     }
                 };
-                sneakPeak.builder.activity.runOnUiThread(longHoldRunnable);
+                sneakPeek.builder.activity.runOnUiThread(longHoldRunnable);
             }
-        }, SneakPeak.LONG_CLICK_DURATION);
+        }, SneakPeek.LONG_CLICK_DURATION);
     }
 
     public void setPosition(int position) {

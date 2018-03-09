@@ -1,7 +1,7 @@
-package cesarferreira.sneakpeak.model
+package cesarferreira.sneakpeek.model
 
 import android.view.View
-import cesarferreira.sneakpeak.SneakPeak
+import cesarferreira.sneakpeek.SneakPeek
 import java.util.*
 
 
@@ -16,14 +16,14 @@ class HoldAndReleaseView(var view: View?) {
         this.holdAndReleaseTimer = Timer()
     }
 
-    fun startHoldAndReleaseTimer(sneakPeak: SneakPeak, position: Int, duration: Long) {
+    fun startHoldAndReleaseTimer(sneakPeek: SneakPeek, position: Int, duration: Long) {
         val holdAndReleaseTimer = Timer()
         this.position = position
 
         holdAndReleaseTimer.schedule(object : TimerTask() {
             override fun run() {
-                sneakPeak.setCurrentHoldAndReleaseView(this@HoldAndReleaseView)
-                sneakPeak.triggerOnHoldEvent(view!!, position)
+                sneakPeek.setCurrentHoldAndReleaseView(this@HoldAndReleaseView)
+                sneakPeek.triggerOnHoldEvent(view!!, position)
             }
         }, duration)
 

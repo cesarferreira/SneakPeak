@@ -1,4 +1,4 @@
-package cesarferreira.sneakpeak.demo
+package cesarferreira.sneakpeek.demo
 
 data class ItemViewModel(val id: Int,
                          val title: String,
